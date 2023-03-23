@@ -46,7 +46,7 @@ extern "C" {
  * @brief The max size to allocate memory. This would be defined in C99 limits.h.
  */
 #ifndef SIZE_MAX
-#define SIZE_MAX ((size_t) -1)
+#define SIZE_MAX ((nns_size_t) -1)
 #endif
 
 #define STR_IS_VALID(s) ((s) && (s)[0] != '\0')

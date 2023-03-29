@@ -187,11 +187,11 @@ TEST(edgeAitt, connectLocal)
 
   ret = nns_edge_connect (client1_h, "127.0.0.1", 1883);
   EXPECT_EQ (ret, NNS_EDGE_ERROR_NONE);
-  usleep (10000);
+  usleep (100000);
   ret = nns_edge_connect (client2_h, "127.0.0.1", 1883);
   EXPECT_EQ (ret, NNS_EDGE_ERROR_NONE);
 
-  sleep (2);
+  usleep (200000);
 
   /* Send request to server */
   data_len = 10U * sizeof (unsigned int);

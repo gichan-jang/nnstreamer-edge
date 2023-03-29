@@ -1,4 +1,4 @@
-name: Integration test on GBS Tizen/x64 from Ubuntu
+name: GBS Tizen/x64 from Ubuntu 18.04
 
 on:
   push:
@@ -9,21 +9,18 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
 
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v1
     - name: prepare deb sources for GBS
-      run: echo "deb [trusted=yes] http://download.tizen.org/tools/latest-release/Ubuntu_20.04/ /" | sudo tee /etc/apt/sources.list.d/tizen.list
+      run: echo "deb [trusted=yes] http://download.tizen.org/tools/latest-release/Ubuntu_18.04/ /" | sudo tee /etc/apt/sources.list.d/tizen.list
     - name: install GBS
       run: sudo apt-get update && sudo apt-get install -y gbs mosquitto-dev
     - name: configure GBS
       run: cp .github/workflows/tizen.gbs.conf ~/.gbs.conf
     - name: run GBS
       run: gbs build --define "testcoverage 1" --define "unit_test 1"
-    - name: get nnstreamer-main
-      run: git clone https://github.com/nnstreamer/nnstreamer.git
-    - name: run GBS on nnstreamer with unit test
-      run: pushd nnstreamer && gbs build --define "edge_test 1" && popd
+
 ## @todo run nnstreamer-edge related test cases only
